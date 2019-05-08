@@ -4,7 +4,7 @@ IMAGETAG=skip
 if [ "${TRAVIS_BRANCH}" == "develop" ]; then
     IMAGETAG=develop
 elif [ "${TRAVIS_BRANCH}" == "master" ]; then
-    VERSION=$( docker run -it openstudio-rnotebook:latest  R --version | grep -o '[0-9][.][0-9][.][0-9]' | tr -d '' )
+    VERSION=$( docker run -it openstudio-rnotebook:latest  R --version | grep -o '[0-99][.][0-99][.][0-99]' | tr -d '' )
     OUT=$?
 
     # Extended version (independent of $OUT)
