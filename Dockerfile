@@ -7,6 +7,8 @@ LABEL MAINTAINER Brian Ball <brian.ball@nrel.gov>
 #link gtar to tar for devtools::install_github to work
 RUN ln -s /bin/tar /bin/gtar
 
+ARG GITHUB_PAT 
+
 # Add in the additional R packages
 ADD /install_packages.R install_packages.R
 RUN Rscript install_packages.R
