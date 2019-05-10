@@ -40,7 +40,7 @@
 # Function for installing and verifying that the package was installed correctly (i.e. can be loaded)
 install_and_verify = function(package_name, configure.args=c(), repos=c('http://cloud.r-project.org','http://cran.r-project.org')){
     print(paste('Calling install for package ', package_name, sep=''))
-    install.packages(package_name, configure.args=configure.args, repos=repos, quiet=TRUE)
+    install.packages(package_name, configure.args=configure.args, repos=repos)
     if (!require(package_name, character.only = TRUE)){
         print('Error installing package, check log')
         quit(status=1)
