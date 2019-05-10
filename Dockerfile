@@ -26,7 +26,7 @@ RUN R -e "options(warn=2); install.packages('gridExtra', repos=c('http://cloud.r
 RUN R -e "options(warn=2); install.packages('knitr', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('knitr', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
 RUN R -e "options(warn=2); install.packages('rmarkdown', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('rmarkdown', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
 RUN R -e "options(warn=2); install.packages('pkgbuild', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('pkgbuild', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
-RUN R -e "options(warn=2); install.packages('rstan', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('rstan', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
+RUN R -e "options(warn=2); install.packages('rstan', repos=c('http://cloud.r-project.org','http://cran.r-project.org')); if (!require('rstan', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
 RUN R -e "options(warn=2); install.packages('fields', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('fields', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
 
 ENV RSTUDIO_VERSION=1.2.1335
