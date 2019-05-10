@@ -12,22 +12,22 @@ ARG GITHUB_PAT
 # Add in the additional R packages
 #ADD /install_packages.R install_packages.R
 #RUN Rscript install_packages.R
-RUN R -e "install.packages('loo', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
-RUN R -e "install.packages('inline', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
-RUN R -e "install.packages('Rcpp', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
-RUN R -e "install.packages('coda', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
-RUN R -e "install.packages('BH', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
-RUN R -e "install.packages('RcppEigen', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
-RUN R -e "install.packages('StanHeaders', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
-RUN R -e "install.packages('RInside', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
-RUN R -e "install.packages('RUnit', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
-RUN R -e "install.packages('ggplot2', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
-RUN R -e "install.packages('gridExtra', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
-RUN R -e "install.packages('knitr', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
-RUN R -e "install.packages('rmarkdown', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
-RUN R -e "install.packages('pkgbuild', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
-RUN R -e "install.packages('rstan', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
-RUN R -e "install.packages('fields', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
+RUN R -e "options(warn=2); install.packages('loo', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('loo', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
+RUN R -e "options(warn=2); install.packages('inline', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('inline', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
+RUN R -e "options(warn=2); install.packages('Rcpp', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('Rcpp', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
+RUN R -e "options(warn=2); install.packages('coda', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('coda', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
+RUN R -e "options(warn=2); install.packages('BH', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('BH', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
+RUN R -e "options(warn=2); install.packages('RcppEigen', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('RcppEigen', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
+RUN R -e "options(warn=2); install.packages('StanHeaders', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('StanHeaders', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
+RUN R -e "options(warn=2); install.packages('RInside', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('RInside', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
+RUN R -e "options(warn=2); install.packages('RUnit', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('RUnit', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
+RUN R -e "options(warn=2); install.packages('ggplot2', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('ggplot2', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
+RUN R -e "options(warn=2); install.packages('gridExtra', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('gridExtra', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
+RUN R -e "options(warn=2); install.packages('knitr', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('knitr', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
+RUN R -e "options(warn=2); install.packages('rmarkdown', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('rmarkdown', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
+RUN R -e "options(warn=2); install.packages('pkgbuild', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('pkgbuild', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
+RUN R -e "options(warn=2); install.packages('rstan', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('rstan', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
+RUN R -e "options(warn=2); install.packages('fields', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('fields', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
 
 ENV RSTUDIO_VERSION=1.2.1335
 ARG S6_VERSION
