@@ -12,22 +12,22 @@ ARG GITHUB_PAT
 # Add in the additional R packages
 #ADD /install_packages.R install_packages.R
 #RUN Rscript install_packages.R
-RUN R -e "install.packages('loo', repos=c('http://cloud.r-project.org','http://cran.r-project.org'))"
-RUN R -e "install.packages('inline', repos=c('http://cloud.r-project.org','http://cran.r-project.org'))"
-RUN R -e "install.packages('Rcpp', repos=c('http://cloud.r-project.org','http://cran.r-project.org'))"
-RUN R -e "install.packages('coda', repos=c('http://cloud.r-project.org','http://cran.r-project.org'))"
-RUN R -e "install.packages('BH', repos=c('http://cloud.r-project.org','http://cran.r-project.org'))"
-RUN R -e "install.packages('RcppEigen', repos=c('http://cloud.r-project.org','http://cran.r-project.org'))"
-RUN R -e "install.packages('StanHeaders', repos=c('http://cloud.r-project.org','http://cran.r-project.org'))"
-RUN R -e "install.packages('RInside', repos=c('http://cloud.r-project.org','http://cran.r-project.org'))"
-RUN R -e "install.packages('RUnit', repos=c('http://cloud.r-project.org','http://cran.r-project.org'))"
-RUN R -e "install.packages('ggplot2', repos=c('http://cloud.r-project.org','http://cran.r-project.org'))"
-RUN R -e "install.packages('gridExtra', repos=c('http://cloud.r-project.org','http://cran.r-project.org'))"
-RUN R -e "install.packages('knitr', repos=c('http://cloud.r-project.org','http://cran.r-project.org'))"
-RUN R -e "install.packages('rmarkdown', repos=c('http://cloud.r-project.org','http://cran.r-project.org'))"
-RUN R -e "install.packages('pkgbuild', repos=c('http://cloud.r-project.org','http://cran.r-project.org'))"
-RUN R -e "install.packages('rstan', repos=c('http://cloud.r-project.org','http://cran.r-project.org'))"
-RUN R -e "install.packages('fields', repos=c('http://cloud.r-project.org','http://cran.r-project.org'))"
+RUN R -e "install.packages('loo', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
+RUN R -e "install.packages('inline', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
+RUN R -e "install.packages('Rcpp', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
+RUN R -e "install.packages('coda', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
+RUN R -e "install.packages('BH', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
+RUN R -e "install.packages('RcppEigen', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
+RUN R -e "install.packages('StanHeaders', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
+RUN R -e "install.packages('RInside', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
+RUN R -e "install.packages('RUnit', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
+RUN R -e "install.packages('ggplot2', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
+RUN R -e "install.packages('gridExtra', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
+RUN R -e "install.packages('knitr', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
+RUN R -e "install.packages('rmarkdown', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
+RUN R -e "install.packages('pkgbuild', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
+RUN R -e "install.packages('rstan', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
+RUN R -e "install.packages('fields', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE)"
 
 ENV RSTUDIO_VERSION=1.2.1335
 ARG S6_VERSION
