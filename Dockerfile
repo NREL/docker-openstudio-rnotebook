@@ -48,6 +48,7 @@ RUN apt-get update \
     libllvm3.8 \
     libobjc4 \
     libgc1c2 \
+    locales \
   && RSTUDIO_URL="http://download2.rstudio.org/server/trusty/amd64/rstudio-server-${RSTUDIO_VERSION}-amd64.deb" \
   && wget -q $RSTUDIO_URL \
   && dpkg -i rstudio-server-*-amd64.deb \
@@ -102,7 +103,9 @@ RUN apt-get update \
           \nloadRData="0" \
           \nsaveAction="0"' \
           > /home/rstudio/.rstudio/monitored/user-settings/user-settings \
-  && chown -R rstudio:rstudio /home/rstudio/.rstudio
+  && chown -R rstudio:rstudio /home/rstudio/.rstudio \
+  && locale-gen en_US en_US.UTF-8 \
+  && dpkg-reconfigure locales
 
 COPY userconf.sh /etc/cont-init.d/userconf
 
@@ -110,10 +113,15 @@ COPY userconf.sh /etc/cont-init.d/userconf
 COPY add_shiny.sh /etc/cont-init.d/add
 COPY disable_auth_rserver.conf /etc/rstudio/disable_auth_rserver.conf
 COPY pam-helper.sh /usr/lib/rstudio-server/bin/pam-helper
+    
+#setup directory structure
+RUN mkdir /home/rstudio/data && chown rstudio:rstudio /home/rstudio/data && chmod 775 /home/rstudio/data
+RUN mkdir /home/rstudio/notebooks && chown rstudio:rstudio /home/rstudio/notebooks && chmod 775 /home/rstudio/notebooks
+
+#copy notebooks over and set permissions to joyvan
+#COPY ./notebooks/main.R /home/rstudio/notebooks/main.R
+#RUN chown rstudio:rstudio /home/rstudio/notebooks/main.R
 
 EXPOSE 8787
-
-## automatically link a shared volume for kitematic users
-#VOLUME /home/rstudio/
 
 CMD ["/init"]
