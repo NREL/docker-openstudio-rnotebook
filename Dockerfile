@@ -10,6 +10,7 @@ RUN ln -s /bin/tar /bin/gtar
 ARG GITHUB_PAT 
 
 # Add in the additional R packages
+# these will live at /usr/local/lib/R/library
 ADD /install_packages.R install_packages.R
 RUN Rscript install_packages.R
 
@@ -113,6 +114,6 @@ COPY pam-helper.sh /usr/lib/rstudio-server/bin/pam-helper
 EXPOSE 8787
 
 ## automatically link a shared volume for kitematic users
-VOLUME /home/rstudio/kitematic
+#VOLUME /home/rstudio/
 
 CMD ["/init"]
