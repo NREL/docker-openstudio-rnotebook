@@ -9,6 +9,6 @@ jobs:
     - stage: deploy
       if: branch = master OR branch = develop
       script:
-        - travis_wait 30 docker build --build-arg GITHUB_PAT=$GITHUB_PAT -t openstudio-rnotebook:latest .
+        - docker build --build-arg GITHUB_PAT=$GITHUB_PAT -t openstudio-rnotebook:latest .
       after_success:
         - ./deploy_docker.sh
