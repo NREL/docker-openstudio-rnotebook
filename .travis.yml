@@ -9,15 +9,6 @@ jobs:
     - stage: deploy
       if: branch = master OR branch = develop
       script:
-        - travis_wait 30 docker build -t openstudio-rnotebook:latest --build-arg GITHUB_PAT=$GITHUB_PAT .
+        - docker build --build-arg GITHUB_PAT=$GITHUB_PAT -t openstudio-rnotebook:latest .
       after_success:
         - ./deploy_docker.sh
-  
-notifications:
-  slack:
-    on_pull_requests: true
-    on_success: change
-    on_failure: change
-    rooms:
-      secure: G5hoK8S1gFT/rZ3L1+SNHITDQSZaLIhEPb4/12TXoUuNK15SFWjr99updPBO8f04dS7GGS7MlzWvoXiLFujDWyWdb2v6wWw6A810ZU2u3KwFfevb1ewR+oxUdWfk0DI/PY2opdMyhC9YoHfSV4wo/IG659kXKKLOVBBqKKdhjMQJNHWIRiT7LgpYqlB1TRHfcxIlL2e/cIAIzVsj3o2vwgd7uFPdwVI9tzHSJlZyptOxWvQ0IVmNksSLNxaJLwHRs7cdrV5dcH+jLJaz2Kwdcu3b/0baaFGfQMKhQrTefLlESN7SjR5vzrh7Us0Y6fuOEa652bVy/gTkWGcw9F5x200vYuQSov3kPO8wxGSe9haMMkZ231jZW9Zi3VyhzDAe0eNnwxo42drOumrjK3ukvAXB4OTptxUlukvHT7DY5VcatTefI0zDt9aYA3/JLjqrxfcCweWs2IAiaapJRTSnpk+hKgDFxOh2FxohTOg/kH8f9omjg3RyJsy/wCggx12baUuyfKcOAseGtZQaXcKJ7An8epHUx8SV5ZmRUWSthDmiEcT7UmFfVqk+O0VM5gGvrgsiUvoRqs5/7fFEXAUP+djVAnd7Do4HTwG8ELgqmN0WnpNrujSenE9hQ1cou897/JTGHcqL+rwOcLEteo6VqJMVeRfsSB96hpU9faX5bE0=
-

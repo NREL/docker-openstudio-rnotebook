@@ -10,24 +10,9 @@ RUN ln -s /bin/tar /bin/gtar
 ARG GITHUB_PAT 
 
 # Add in the additional R packages
-#ADD /install_packages.R install_packages.R
-#RUN Rscript install_packages.R
-RUN R -e "options(warn=2); install.packages('loo', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('loo', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
-RUN R -e "options(warn=2); install.packages('inline', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('inline', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
-RUN R -e "options(warn=2); install.packages('Rcpp', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('Rcpp', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
-RUN R -e "options(warn=2); install.packages('coda', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('coda', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
-RUN R -e "options(warn=2); install.packages('BH', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('BH', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
-RUN R -e "options(warn=2); install.packages('RcppEigen', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('RcppEigen', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
-RUN R -e "options(warn=2); install.packages('StanHeaders', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('StanHeaders', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
-RUN R -e "options(warn=2); install.packages('RInside', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('RInside', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
-RUN R -e "options(warn=2); install.packages('RUnit', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('RUnit', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
-RUN R -e "options(warn=2); install.packages('ggplot2', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('ggplot2', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
-RUN R -e "options(warn=2); install.packages('gridExtra', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('gridExtra', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
-RUN R -e "options(warn=2); install.packages('knitr', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('knitr', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
-RUN R -e "options(warn=2); install.packages('rmarkdown', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('rmarkdown', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
-RUN R -e "options(warn=2); install.packages('pkgbuild', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('pkgbuild', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
-RUN R -e "options(warn=2); install.packages('rstan', repos=c('http://cloud.r-project.org','http://cran.r-project.org')); if (!require('rstan', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
-RUN R -e "options(warn=2); install.packages('fields', repos=c('http://cloud.r-project.org','http://cran.r-project.org'), quiet=TRUE); if (!require('fields', character.only = TRUE)){ print('Error installing package, check log'); quit(status=1) }"
+# these will live at /usr/local/lib/R/library
+ADD /install_packages.R install_packages.R
+RUN Rscript install_packages.R
 
 ENV RSTUDIO_VERSION=1.2.1335
 ARG S6_VERSION
@@ -40,11 +25,7 @@ ENV PANDOC_TEMPLATES_VERSION=${PANDOC_TEMPLATES_VERSION:-2.6}
 ## Download and install RStudio server & dependencies
 ## Attempts to get detect latest version, otherwise falls back to version given in $VER
 ## Symlink pandoc, pandoc-citeproc so they are available system-wide
-RUN \
-#     add-apt-repository -y ppa:marutter/rrutter \
-#  && add-apt-repository -y ppa:marutter/c2d4u \
-#  && apt-get update \
-  apt-get update \
+RUN apt-get update \
   && apt-get install -y --no-install-recommends \
     dialog \
     file \
@@ -98,7 +79,7 @@ RUN \
 	&& chown rstudio:rstudio /home/rstudio \
 	&& addgroup rstudio staff \
   ## Prevent rstudio from deciding to use /usr/bin/R if a user apt-get installs a package
-  &&  echo 'rsession-which-r=/usr/local/bin/R' >> /etc/rstudio/rserver.conf \
+  && echo 'rsession-which-r=/usr/local/bin/R' >> /etc/rstudio/rserver.conf \
   ## use more robust file locking to avoid errors when using shared volumes:
   && echo 'lock-type=advisory' >> /etc/rstudio/file-locks \
   ## configure git not to request password each time
@@ -133,6 +114,6 @@ COPY pam-helper.sh /usr/lib/rstudio-server/bin/pam-helper
 EXPOSE 8787
 
 ## automatically link a shared volume for kitematic users
-VOLUME /home/rstudio/kitematic
+#VOLUME /home/rstudio/
 
 CMD ["/init"]

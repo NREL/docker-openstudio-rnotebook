@@ -24,7 +24,7 @@ if [ "${IMAGETAG}" != "skip" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ]; then
     echo "Tagging image as $IMAGETAG"
 
     docker login -u $DOCKER_USER -p $DOCKER_PASS
-    docker build -f Dockerfile -t nrel/openstudio-rnotebook:$IMAGETAG -t nrel/openstudio-rnotebook:latest .
+    docker build --build-arg GITHUB_PAT=$GITHUB_PAT -f Dockerfile -t nrel/openstudio-rnotebook:$IMAGETAG -t nrel/openstudio-rnotebook:latest .
     docker push nrel/openstudio-rnotebook:$IMAGETAG
     docker push nrel/openstudio-rnotebook:latest
 else
